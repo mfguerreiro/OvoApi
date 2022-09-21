@@ -1,0 +1,518 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "version": "1.2.0",
+    "title": "Connector Shopify",
+    "description": "API Connector Shopify"
+  },
+  "basePath": "/",
+  "servers": [
+    {
+      "url": "http://localhost:5001",
+      "description": "Local"
+    },
+    {
+      "url": "https://outldb-api.smartenvios.tec.br/shopify",
+      "description": "Sandbox"
+    }
+  ],
+  "paths": {
+    "/shopify": {
+      "get": {
+        "tags": [
+          "Authorization"
+        ],
+        "summary": "Endpoint padrão para Shopify",
+        "description": "Este endpoint verifica se o usuário já tem o app instalado: <br><br><b>Se tiver:</b> redireciona para a página principal do app; <br><b>Se não tiver:</b> redireciona para o endpoint de solicitar autorização (/auth)."
+      }
+    },
+    "/shopify/auth": {
+      "get": {
+        "tags": [
+          "Authorization"
+        ],
+        "summary": "Iniciar a solicitação de autorização na shopify",
+        "description": "Esse endpoint é responsável por redirecionar o usuário à uma tela de aceite de permissões de acesso e escopo."
+      }
+    },
+    "/shopify/auth/callback": {
+      "get": {
+        "tags": [
+          "Authorization"
+        ],
+        "summary": "Callback da solicitação de autorização na shopify",
+        "description": "Esse endpoint é chamado logo após a solicitação de autorização, onde virá as credenciais de acesso e outra informações da loja."
+      }
+    },
+    "/shopify/uninstall": {
+      "get": {
+        "tags": [
+          "Authorization"
+        ],
+        "summary": "Recepção do webhook de desinstalação do app na shopify.",
+        "description": "Esse endpoint é responsável por excluir as entidades cadastradas referente ao embarcador que está desinstalando o app na shopify."
+      }
+    },
+    "/shopify/finish-config": {
+      "post": {
+        "tags": [
+          "Authorization"
+        ],
+        "summary": "Finalizar a configuração na Shopify",
+        "description": "Essa request será chamada quando a instalação do app na shopify for finalizada. \nCadastra a SmartEnvios como provedora de frete.",
+        "requestBody": {
+          "description": "Corpo da requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "shop": {
+                    "type": "string"
+                  },
+                  "customerToken": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Configuração na shopify finalizada com sucesso."
+          },
+          "400": {
+            "description": "Erro ao finalizar a configuração na Shopify."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/shopify/quote/freight": {
+      "post": {
+        "tags": [
+          "Quotation"
+        ],
+        "summary": "Criar cotação para a Shopify",
+        "description": "Essa request será chamada pela Shopify no checkout de um pedido, onde serão retornadas as cotações disponíveis.",
+        "requestBody": {
+          "description": "Corpo da requisição",
+          "content": {
+            "Headers": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customerToken": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "Body": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "rate": {
+                    "type": "object",
+                    "properties": {
+                      "origin": {
+                        "type": "object",
+                        "properties": {
+                          "country": {
+                            "type": "string"
+                          },
+                          "postal_code": {
+                            "type": "string"
+                          },
+                          "province": {
+                            "type": "string"
+                          },
+                          "city": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "address2": {
+                            "type": "string"
+                          },
+                          "address3": {
+                            "type": "string"
+                          },
+                          "latitude": {
+                            "type": "number"
+                          },
+                          "longitude": {
+                            "type": "number"
+                          },
+                          "phone": {
+                            "type": "string"
+                          },
+                          "fax": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "address_type": {
+                            "type": "string"
+                          },
+                          "company_name": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "destination": {
+                        "type": "object",
+                        "properties": {
+                          "country": {
+                            "type": "string"
+                          },
+                          "postal_code": {
+                            "type": "string"
+                          },
+                          "province": {
+                            "type": "string"
+                          },
+                          "city": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "address1": {
+                            "type": "string"
+                          },
+                          "address2": {
+                            "type": "string"
+                          },
+                          "address3": {
+                            "type": "string"
+                          },
+                          "latitude": {
+                            "type": "number"
+                          },
+                          "longitude": {
+                            "type": "number"
+                          },
+                          "phone": {
+                            "type": "string"
+                          },
+                          "fax": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "address_type": {
+                            "type": "string"
+                          },
+                          "company_name": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "sku": {
+                            "type": "string"
+                          },
+                          "quantity": {
+                            "type": "number"
+                          },
+                          "grams": {
+                            "type": "number"
+                          },
+                          "price": {
+                            "type": "number"
+                          },
+                          "vendor": {
+                            "type": "string"
+                          },
+                          "requires_shipping": {
+                            "type": "string"
+                          },
+                          "taxable": {
+                            "type": "string"
+                          },
+                          "fulfillment_service": {
+                            "type": "string"
+                          },
+                          "properties": {
+                            "type": "object"
+                          },
+                          "product_id": {
+                            "type": "number"
+                          },
+                          "variant_id": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "currency": {
+                        "type": "string"
+                      },
+                      "locale": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cotação realizada com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "rates": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "service_name": {
+                            "type": "string"
+                          },
+                          "service_code": {
+                            "type": "number"
+                          },
+                          "total_price": {
+                            "type": "number"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "currency": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro ao realizar cotação."
+          },
+          "500": {
+            "description": "Erro interno do servidor."
+          }
+        }
+      }
+    },
+    "/self-registration": {
+      "post": {
+        "tags": [
+          "Conector"
+        ],
+        "summary": "Auto cadastro do connector",
+        "description": "Request para fazer auto cadastro do connector da Yampi",
+        "responses": {
+          "204": {
+            "description": "Auto cadastro realizado com sucesso"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/auth-check": {
+      "post": {
+        "tags": [
+          "Conector"
+        ],
+        "summary": "Verificar credenciais de autenticação",
+        "description": "Verificar se as credenciais de autenticação estão corretas",
+        "requestBody": {
+          "description": "Corpo da requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "auth": {
+                    "type": "object",
+                    "properties": {
+                      "shop": {
+                        "type": "string"
+                      },
+                      "customerToken": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Todas as credenciais estão válidas"
+          },
+          "400": {
+            "description": "Há alguma credencial inválida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "ERROR"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Erro ao validar credenciais no connector"
+                    },
+                    "request": {
+                      "type": "object",
+                      "properties": {
+                        "auth": {
+                          "type": "object",
+                          "properties": {
+                            "shop": {
+                              "type": "string"
+                            },
+                            "customerToken": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "response": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "stack": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "headers": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": ["Health"],
+        "summary": "Verificar saúde da aplicação.",
+        "description": "Verificar saúde da aplicação.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "token",
+            "schema": {
+              "type": "string",
+              "required": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "uptime": {
+                      "type": "number"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "example": {
+                  "uptime": 245.5957856,
+                  "message": "OK",
+                  "timestamp": 1663113323796
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "statusCode": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "example": {
+                  "statusCode": 401,
+                  "message": "Token inválido."
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "uptime": {
+                      "type": "number"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "example": {
+                  "uptime": 2.3774689,
+                  "message": "ERROR",
+                  "timestamp": 1663113382717
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
