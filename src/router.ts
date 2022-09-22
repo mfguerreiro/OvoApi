@@ -2,10 +2,10 @@ import { Router } from "express";
 
 const router = Router();
 
-router.post("/teste", (req, res) => {
+router.post("/test", (req, res) => {
   console.log("Chegou no teste");
 
-  res.send("Chegou no teste");
+  res.json({ test: "Chegou no teste" });
 });
 
 export { router };
