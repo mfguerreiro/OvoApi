@@ -1,0 +1,30 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "version": "1.2.0",
+      "title": "Connector Shopify",
+      "description": "API Connector Shopify"
+    },
+    "basePath": "/",
+    "servers": [
+      {
+        "url": "http://localhost:3000",
+        "description": "Local"
+      },
+      {
+        "url": "https://outldb-api.smartenvios.tec.br/shopify",
+        "description": "Sandbox"
+      }
+    ],
+    "paths": {
+      "/teste": {
+        "get": {
+          "tags": [
+            "Authorization"
+          ],
+          "summary": "Endpoint teste",
+          "description": "Este endpoint verifica se o usuário já tem o app instalado: <br><br><b>Se tiver:</b> redireciona para a página principal do app; <br><b>Se não tiver:</b> redireciona para o endpoint de solicitar autorização (/auth)."
+        }
+      }
+    }
+  }
