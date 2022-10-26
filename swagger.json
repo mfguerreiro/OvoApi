@@ -1,9 +1,8 @@
 {
     "openapi": "3.0.3",
     "info": {
-      "version": "1.2.0",
-      "title": "Connector Shopify",
-      "description": "API Connector Shopify"
+      "version": "1.0.0",
+      "title": "Ovo API"
     },
     "basePath": "/",
     "servers": [
@@ -12,18 +11,46 @@
         "description": "Local"
       },
       {
-        "url": "https://outldb-api.smartenvios.tec.br/shopify",
-        "description": "Sandbox"
+        "url": "https://ovoapi.herokuapp.com/",
+        "description": "Production"
       }
     ],
     "paths": {
-      "/teste": {
-        "get": {
+      "/user": {
+        "post": {
           "tags": [
-            "Authorization"
+            "User"
           ],
-          "summary": "Endpoint teste",
-          "description": "Este endpoint verifica se o usuário já tem o app instalado: <br><br><b>Se tiver:</b> redireciona para a página principal do app; <br><b>Se não tiver:</b> redireciona para o endpoint de solicitar autorização (/auth)."
+          "summary": "Endpoint para criação de usuário",
+          "requestBody": {
+            "description": "Corpo da requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "device_id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Usuário criado com sucesso."
+            },
+            "400": {
+              "description": "Requisição incompleta"
+            },
+            "50x": {
+              "description": "Erro interno de servidor"
+            }
+          }
         }
       }
     }

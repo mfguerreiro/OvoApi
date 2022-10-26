@@ -38,6 +38,8 @@
     "resolveJsonModule": true /* Enable importing .json files. */,
     // "noResolve": true,                                /* Disallow 'import's, 'require's or '<reference>'s from expanding the number of files TypeScript should add to a project. */
     "paths": {
+      "@core/*": ["./core/*"],
+      "@config/*": ["./config/*"],
       "*": ["./node_modules/*"]
     },
     /* JavaScript Support */
@@ -77,8 +79,12 @@
     // "preserveSymlinks": true,                         /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */
     "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
 
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
     /* Type Checking */
     "strict": true /* Enable all strict type-checking options. */,
+    "strictPropertyInitialization": false,
     // "noImplicitAny": true,                            /* Enable error reporting for expressions and declarations with an implied 'any' type. */
     // "strictNullChecks": true,                         /* When type checking, take into account 'null' and 'undefined'. */
     // "strictFunctionTypes": true,                      /* When assigning functions, check to ensure parameters and the return values are subtype-compatible. */
