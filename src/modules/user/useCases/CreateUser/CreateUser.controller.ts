@@ -7,9 +7,9 @@ export class CreateUserController {
 
   async handle(req: Request, res: Response) {
     try {
-      const { name, device_id } = req.body;
+      const { name, deviceId } = req.body;
 
-      if (!name || !device_id) {
+      if (!name || !deviceId) {
         return res.status(StatusCodes.BAD_REQUEST).json({
           status: StatusCodes.BAD_REQUEST,
           message: "Parâmetros obrigatórios não informados",
@@ -18,7 +18,7 @@ export class CreateUserController {
 
       const result = await this.createUser.execute({
         name,
-        device_id,
+        deviceId,
       });
 
       if (result.isLeft()) {

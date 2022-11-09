@@ -30,7 +30,7 @@ export class User implements IUser {
   @Column()
   @IsNotEmpty()
   @IsString()
-  device_id: string;
+  deviceId: string;
 
   @CreateDateColumn()
   @IsNotEmpty()

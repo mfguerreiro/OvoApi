@@ -32,7 +32,7 @@
                     "name": {
                         "type": "string"
                     },
-                    "device_id": {
+                    "deviceId": {
                       "type": "string"
                     }
                   }
