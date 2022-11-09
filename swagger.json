@@ -53,6 +53,43 @@
           }
         }
       },
+      "/user/deviceId/:deviceId": {
+        "post": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Endpoint para buscar usuário pelo device Id",
+          "responses": {
+            "201": {
+              "description": "Usuário encontrado.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "deviceId": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Requisição incompleta"
+            },
+            "50x": {
+              "description": "Erro interno de servidor"
+            }
+          }
+        }
+      },
       "/route": {
         "post": {
           "tags": [
