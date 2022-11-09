@@ -4,7 +4,7 @@ import { User } from "../entity/user.entity";
 import { IUserRepository } from "./interfaces/IUserRepository.interface";
 
 export class UserRepository implements IUserRepository {
-  async create(data: IUser): Promise<IUser> {
+  async create(data: IUser): Promise<User> {
     const created = await connection
       .createQueryBuilder()
       .insert()
@@ -13,6 +13,6 @@ export class UserRepository implements IUserRepository {
       .returning("*")
       .execute();
 
-    return created.generatedMaps[0] as IUser;
+    return created.generatedMaps[0] as User;
   }
 }

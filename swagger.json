@@ -52,6 +52,43 @@
             }
           }
         }
+      },
+      "/route": {
+        "post": {
+          "tags": [
+            "Rotas"
+          ],
+          "summary": "Endpoint para criação de rotas",
+          "requestBody": {
+            "description": "Corpo da requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "userId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Rota criada com sucesso."
+            },
+            "400": {
+              "description": "Requisição incompleta"
+            },
+            "50x": {
+              "description": "Erro interno de servidor"
+            }
+          }
+        }
       }
     }
   }

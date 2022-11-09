@@ -10,13 +10,17 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { IUser } from "./interfaces/IUser.interface";
+import { User } from "../../user/entity/user.entity";
+import { IRoute } from "./interfaces/IRoute.interface";
 
-@Entity("users")
-export class User implements IUser {
+@Entity("routes")
+export class Route implements IRoute {
   @PrimaryGeneratedColumn("uuid")
   @IsNotEmpty()
   @IsUUID("all")
@@ -26,11 +30,6 @@ export class User implements IUser {
   @IsNotEmpty()
   @IsString()
   name: string;
-
-  @Column()
-  @IsNotEmpty()
-  @IsString()
-  device_id: string;
 
   @CreateDateColumn()
   @IsNotEmpty()
@@ -46,4 +45,14 @@ export class User implements IUser {
   @IsOptional()
   @IsDate()
   deleted_at: Date;
+
+  @Column()
+  @IsNotEmpty()
+  @IsString()
+  userId: string;
+
+  @ManyToOne(() => User, (user: User) => user.id)
+  @JoinColumn()
+  @Index("route-user-idx")
+  user: User;
 }
