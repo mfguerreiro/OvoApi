@@ -3,7 +3,7 @@ import { DataSource } from "typeorm";
 export const connection = new DataSource({
   url: process.env.DATABASE_URL,
   type: "postgres",
-  entities: ["src/**/*.entity.ts"],
+  entities: [`${__dirname}/../**/*.entity.{ts,js}`],
   ssl: {
     rejectUnauthorized: false,
   },
