@@ -237,6 +237,150 @@
           }
         }
       }
+    },
+    "/stock": {
+      "post": {
+        "tags": [
+          "Estoque"
+        ],
+        "summary": "Endpoint para criação de estoque",
+        "requestBody": {
+          "description": "Corpo da requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "quantity": {
+                    "type": "number"
+                  },
+                  "costValue": {
+                    "type": "number"
+                  },
+                  "saleValue": {
+                    "type": "number"
+                  },
+                  "purchaseDate": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "productId": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Estoque criada com sucesso."
+          },
+          "400": {
+            "description": "Requisição incompleta"
+          },
+          "50x": {
+            "description": "Erro interno de servidor"
+          }
+        }
+      }
+    },
+    "/stock/getAvaiable/:userId": {
+      "get": {
+        "tags": [
+          "Estoque"
+        ],
+        "summary": "Endpoint para buscar estoques disponíveis pelo user Id",
+        "responses": {
+          "200": {
+            "description": "Estoque encontrados.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "quantity": {
+                      "type": "number"
+                    },
+                    "costValue": {
+                      "type": "number"
+                    },
+                    "saleValue": {
+                      "type": "number"
+                    },
+                    "purchaseDate": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "productId": {
+                      "type": "string"
+                    },
+                    "userId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requisição incompleta"
+          },
+          "50x": {
+            "description": "Erro interno de servidor"
+          }
+        }
+      }
+    },
+    "/stock/userId/:userId": {
+      "get": {
+        "tags": [
+          "Estoque"
+        ],
+        "summary": "Endpoint para buscar estoques pelo user Id",
+        "responses": {
+          "200": {
+            "description": "Estoque encontrados.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "quantity": {
+                      "type": "number"
+                    },
+                    "costValue": {
+                      "type": "number"
+                    },
+                    "saleValue": {
+                      "type": "number"
+                    },
+                    "purchaseDate": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "productId": {
+                      "type": "string"
+                    },
+                    "userId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requisição incompleta"
+          },
+          "50x": {
+            "description": "Erro interno de servidor"
+          }
+        }
+      }
     }
   }
 }

@@ -4,7 +4,7 @@ import { IRouteRepository } from "../../repositories/interfaces/IRouteRepository
 import { CreateRouteError } from "./errors/CreateRoute.error";
 
 export class CreateRoute {
-  constructor(private routeRepository: IRouteRepository) {}
+  constructor(private routeRepository: IRouteRepository) { }
 
   async execute(routeData: IRoute) {
     try {

@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 
 export class CreateRouteController {
-  constructor(private createRoute: CreateRoute) {}
+  constructor(private createRoute: CreateRoute) { }
 
   async handle(req: Request, res: Response) {
     try {

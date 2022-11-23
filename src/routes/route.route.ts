@@ -4,14 +4,16 @@ import { makeGetRouteByUserIdController } from "../modules/route/factories/GetBy
 
 const router = Router();
 
-router.post(
-  "/",
-  makeCreateRouteController().handle.bind(makeCreateRouteController())
-);
-
-router.get(
-  "/userId/:userId",
-  makeGetRouteByUserIdController().handle.bind(makeGetRouteByUserIdController())
-);
+router
+  .post(
+    "/",
+    makeCreateRouteController().handle.bind(makeCreateRouteController())
+  )
+  .get(
+    "/userId/:userId",
+    makeGetRouteByUserIdController().handle.bind(
+      makeGetRouteByUserIdController()
+    )
+  );
 
 export default router;
