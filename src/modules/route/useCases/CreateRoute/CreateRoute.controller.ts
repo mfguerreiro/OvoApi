@@ -22,11 +22,11 @@ export class CreateRouteController {
       });
 
       if (result.isLeft()) {
-        console.log(`Erro ao criar usuário: `);
-        res.send(result.value);
+        console.error(`Erro ao criar rota: `, result.value);
+        return res.send(result.value);
       }
 
-      res.status(StatusCodes.CREATED).send();
+      return res.status(StatusCodes.CREATED).send();
     } catch (error) {
       console.error(error);
       res.send(error);

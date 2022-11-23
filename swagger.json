@@ -1,36 +1,77 @@
 {
-    "openapi": "3.0.3",
-    "info": {
-      "version": "1.0.0",
-      "title": "Ovo API"
+  "openapi": "3.0.3",
+  "info": {
+    "version": "1.0.0",
+    "title": "Ovo API"
+  },
+  "basePath": "/",
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local"
     },
-    "basePath": "/",
-    "servers": [
-      {
-        "url": "http://localhost:3000",
-        "description": "Local"
-      },
-      {
-        "url": "https://ovoapi.herokuapp.com/",
-        "description": "Production"
+    {
+      "url": "https://ovoapi.herokuapp.com/",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/user": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Endpoint para criação de usuário",
+        "requestBody": {
+          "description": "Corpo da requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "deviceId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuário criado com sucesso."
+          },
+          "400": {
+            "description": "Requisição incompleta"
+          },
+          "50x": {
+            "description": "Erro interno de servidor"
+          }
+        }
       }
-    ],
-    "paths": {
-      "/user": {
-        "post": {
-          "tags": [
-            "User"
-          ],
-          "summary": "Endpoint para criação de usuário",
-          "requestBody": {
-            "description": "Corpo da requisição",
+    },
+    "/user/deviceId/:deviceId": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Endpoint para buscar usuário pelo device Id",
+        "responses": {
+          "200": {
+            "description": "Usuário encontrado.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "id": {
+                      "type": "string"
+                    },
                     "name": {
-                        "type": "string"
+                      "type": "string"
                     },
                     "deviceId": {
                       "type": "string"
@@ -40,71 +81,71 @@
               }
             }
           },
-          "responses": {
-            "201": {
-              "description": "Usuário criado com sucesso."
-            },
-            "400": {
-              "description": "Requisição incompleta"
-            },
-            "50x": {
-              "description": "Erro interno de servidor"
-            }
+          "400": {
+            "description": "Requisição incompleta"
+          },
+          "50x": {
+            "description": "Erro interno de servidor"
           }
         }
-      },
-      "/user/deviceId/:deviceId": {
-        "post": {
-          "tags": [
-            "User"
-          ],
-          "summary": "Endpoint para buscar usuário pelo device Id",
-          "responses": {
-            "201": {
-              "description": "Usuário encontrado.",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "deviceId": {
-                        "type": "string"
-                      }
-                    }
+      }
+    },
+    "/route": {
+      "post": {
+        "tags": [
+          "Rotas"
+        ],
+        "summary": "Endpoint para criação de rotas",
+        "requestBody": {
+          "description": "Corpo da requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "string"
                   }
                 }
               }
-            },
-            "400": {
-              "description": "Requisição incompleta"
-            },
-            "50x": {
-              "description": "Erro interno de servidor"
             }
           }
+        },
+        "responses": {
+          "201": {
+            "description": "Rota criada com sucesso."
+          },
+          "400": {
+            "description": "Requisição incompleta"
+          },
+          "50x": {
+            "description": "Erro interno de servidor"
+          }
         }
-      },
-      "/route": {
-        "post": {
-          "tags": [
-            "Rotas"
-          ],
-          "summary": "Endpoint para criação de rotas",
-          "requestBody": {
-            "description": "Corpo da requisição",
+      }
+    },
+    "/route/userId/:userId": {
+      "get": {
+        "tags": [
+          "Rotas"
+        ],
+        "summary": "Endpoint para buscar rotas pelo user Id",
+        "responses": {
+          "200": {
+            "description": "Rotas encontradas.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "id": {
+                      "type": "string"
+                    },
                     "name": {
-                        "type": "string"
+                      "type": "string"
                     },
                     "userId": {
                       "type": "string"
@@ -114,18 +155,88 @@
               }
             }
           },
-          "responses": {
-            "201": {
-              "description": "Rota criada com sucesso."
-            },
-            "400": {
-              "description": "Requisição incompleta"
-            },
-            "50x": {
-              "description": "Erro interno de servidor"
+          "400": {
+            "description": "Requisição incompleta"
+          },
+          "50x": {
+            "description": "Erro interno de servidor"
+          }
+        }
+      }
+    },
+    "/product": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Endpoint para criação de produtos",
+        "requestBody": {
+          "description": "Corpo da requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "string"
+                  }
+                }
+              }
             }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Produto criada com sucesso."
+          },
+          "400": {
+            "description": "Requisição incompleta"
+          },
+          "50x": {
+            "description": "Erro interno de servidor"
+          }
+        }
+      }
+    },
+    "/product/userId/:userId": {
+      "get": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Endpoint para buscar produtos pelo user Id",
+        "responses": {
+          "200": {
+            "description": "Produtos encontrados.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "userId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requisição incompleta"
+          },
+          "50x": {
+            "description": "Erro interno de servidor"
           }
         }
       }
     }
   }
+}

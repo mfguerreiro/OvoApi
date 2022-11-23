@@ -1,28 +1,28 @@
+import { CreateProduct } from "./CreateProduct.service";
 import { Request, Response } from "express";
-import { StatusCodes } from "http-status-codes/build/cjs/status-codes";
-import { CreateUser } from "./CreateUser.service";
+import { StatusCodes } from "http-status-codes";
 
-export class CreateUserController {
-  constructor(private createUser: CreateUser) {}
+export class CreateProductController {
+  constructor(private createProduct: CreateProduct) {}
 
   async handle(req: Request, res: Response) {
     try {
-      const { name, deviceId } = req.body;
+      const { name, userId } = req.body;
 
-      if (!name || !deviceId) {
+      if (!name || !userId) {
         return res.status(StatusCodes.BAD_REQUEST).json({
           status: StatusCodes.BAD_REQUEST,
           message: "Parâmetros obrigatórios não informados",
         });
       }
 
-      const result = await this.createUser.execute({
+      const result = await this.createProduct.execute({
         name,
-        deviceId,
+        userId,
       });
 
       if (result.isLeft()) {
-        console.log(`Erro ao criar usuário: `);
+        console.log(`Erro ao criar produto: `);
         return res.send(result.value);
       }
 

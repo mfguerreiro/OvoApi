@@ -8,7 +8,7 @@ export class CreateRoute {
 
   async execute(routeData: IRoute) {
     try {
-      console.error("Iniciando criação da rota: ", routeData.name);
+      console.info("Iniciando criação da rota: ", routeData.name);
 
       const created = await this.routeRepository.create(routeData);
 

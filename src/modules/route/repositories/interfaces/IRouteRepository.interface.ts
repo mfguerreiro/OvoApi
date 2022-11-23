@@ -3,4 +3,5 @@ import { Route } from "../../entity/route.entity";
 
 export interface IRouteRepository {
   create(data: IRoute): Promise<Route>;
+  getByUserId(userId: string): Promise<IRoute[]>;
 }

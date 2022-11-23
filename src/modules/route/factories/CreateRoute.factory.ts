@@ -3,8 +3,8 @@ import { CreateRouteController } from "../useCases/CreateRoute/CreateRoute.contr
 import { CreateRoute } from "../useCases/CreateRoute/CreateRoute.service";
 
 export function makeCreateRouteController() {
-  const userRepository = new RouteRepository();
-  const createUser = new CreateRoute(userRepository);
-  const createUserController = new CreateRouteController(createUser);
-  return createUserController;
+  const routeRepository = new RouteRepository();
+  const createRoute = new CreateRoute(routeRepository);
+  const createRouteController = new CreateRouteController(createRoute);
+  return createRouteController;
 }

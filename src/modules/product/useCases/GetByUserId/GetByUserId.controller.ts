@@ -1,25 +1,26 @@
-import { GetByDeviceId } from "./GetByDeviceId.service";
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
+import { GetProductByUserId } from "./GetByUserId.service";
 
-export class GetByDeviceIdController {
-  constructor(private getByDeviceId: GetByDeviceId) {}
+export class GetProductByUserIdController {
+  constructor(private getProductByUserId: GetProductByUserId) {}
 
   async handle(req: Request, res: Response) {
     try {
-      const deviceId = req.params.deviceId;
+      const userId = req.params.userId;
 
-      if (!deviceId) {
+      if (!userId) {
         return res.status(StatusCodes.BAD_REQUEST).json({
           status: StatusCodes.BAD_REQUEST,
           message: "Parâmetros obrigatórios não informados",
         });
       }
 
-      const result = await this.getByDeviceId.execute(deviceId);
+      const result = await this.getProductByUserId.execute(userId);
 
       if (result.isLeft()) {
-        return res.send(result.value);
+        console.log(`Erro ao listar produto por usuário: `);
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(result.value);
       }
 
       return res.status(StatusCodes.OK).json(result.value);
