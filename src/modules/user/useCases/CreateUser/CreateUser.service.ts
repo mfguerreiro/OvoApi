@@ -8,7 +8,15 @@ export class CreateUser {
 
   async execute(userData: IUser): Promise<Either<CreateUserError, IUser>> {
     try {
-      console.error("Iniciando criação do usuário: ", userData.name);
+      console.info("Iniciando criação do usuário: ", userData.name);
+
+      const existingUser = await this.userRepository.getByDeviceId(userData.deviceId);
+
+      if(existingUser){
+        console.info(`Usuário do device id '${userData.deviceId}' já existente '${existingUser.id}' e será retornado.`);
+
+        return right(existingUser);
+      }
 
       const created = await this.userRepository.create(userData);
 

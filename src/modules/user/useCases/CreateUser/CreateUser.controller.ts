@@ -26,7 +26,7 @@ export class CreateUserController {
         return res.send(result.value);
       }
 
-      return res.status(StatusCodes.CREATED).send();
+      return res.status(StatusCodes.CREATED).json(result.value);
     } catch (error) {
       console.error(error);
       res.send(error);
