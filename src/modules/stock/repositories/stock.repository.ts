@@ -34,4 +34,11 @@ export class StockRepository implements IStockRepository {
 
     return stocks;
   }
+
+  async getLastCodeByUserId(userId: string): Promise<number> {
+    const stock = await this.stockRepository.findOne({ where: { userId }, order: { created_at: 'DESC' } });
+
+    return stock?.code || 0;
+  }
+
 }

@@ -5,4 +5,5 @@ export interface IStockRepository {
   create(data: IStock): Promise<Stock>;
   getAvaiableByUserId(userId: string): Promise<IStock[]>;
   getByUserId(userId: string): Promise<IStock[]>;
+  getLastCodeByUserId(userId: string): Promise<number>;
 }
