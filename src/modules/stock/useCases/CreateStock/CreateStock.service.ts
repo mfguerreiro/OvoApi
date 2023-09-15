@@ -13,6 +13,9 @@ export class CreateStock {
         stockData.productId
       );
 
+      let lastCode = await this.stockRepository.getLastCodeByUserId(stockData.userId);
+
+      stockData.code = lastCode++;
       stockData.purchaseDate = new Date(stockData.purchaseDate);
 
       const created = await this.stockRepository.create(stockData);

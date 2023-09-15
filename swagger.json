@@ -11,7 +11,7 @@
       "description": "Local"
     },
     {
-      "url": "https://ovoapi.herokuapp.com/",
+      "url": "https://ovoapi.onrender.com/",
       "description": "Production"
     }
   ],

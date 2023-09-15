@@ -31,6 +31,11 @@ export class Stock implements IStock {
   @Column({ type: "int" })
   @IsNotEmpty()
   @IsNumber()
+  code: number;
+
+  @Column({ type: "int" })
+  @IsNotEmpty()
+  @IsNumber()
   quantity: number;
 
   @Column({ type: "float" })
